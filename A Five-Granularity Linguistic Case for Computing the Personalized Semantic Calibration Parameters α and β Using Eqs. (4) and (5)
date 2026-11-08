@@ -1,0 +1,85 @@
+**Input Data**
+
+Five-granularity linguistic term set:
+
+\[
+S=\{s_{-2},s_{-1},s_{0},s_{1},s_{2}\},\qquad \tau=2
+\]
+
+Standard utility function:
+
+\[
+g(s_a)=\frac{a+2}{4}
+\]
+
+Thus,
+
+\[
+g(s_0)=0.50,\qquad g(s_1)=0.75
+\]
+
+Two benchmark cases are used: \(x_1\) (low-end screen) and \(x_2\) (high-end screen). The system-standard utilities are:
+
+\[
+\nu_s=(\nu_s(x_1),\nu_s(x_2))=(0.30,\ 0.70)
+\]
+
+The experts’ subjective utilities for the two benchmark cases are:
+
+| Expert | Type | \(\nu_p(x_1)\) | \(\nu_p(x_2)\) |
+|---|---|---:|---:|
+| \(E_1\) | Strict / pessimistic, overall lower | 0.25 | 0.65 |
+| \(E_2\) | Lenient / optimistic, overall higher | 0.35 | 0.75 |
+| \(E_3\) | Neutral | 0.30 | 0.70 |
+
+**Computation of \(\alpha\) and \(\beta\) Using Eqs. (4) and (5)**
+
+\[
+\alpha_k=\frac{1}{m}\sum_{i=1}^{m}\frac{\nu_s(x_i)}{\nu_p(x_i)},
+\qquad
+\beta_k=\frac{1}{m}\sum_{i=1}^{m}\left(\nu_s(x_i)-\nu_p(x_i)\right),
+\]
+
+where \(m=2\).
+
+For \(E_1\):
+
+\[
+\alpha_1=\frac{1}{2}\left(\frac{0.30}{0.25}+\frac{0.70}{0.65}\right)
+=\frac{1}{2}(1.2000+1.0769)=1.1385
+\]
+
+\[
+\beta_1=\frac{1}{2}\left[(0.30-0.25)+(0.70-0.65)\right]
+=\frac{1}{2}(0.05+0.05)=0.05
+\]
+
+For \(E_2\):
+
+\[
+\alpha_2=\frac{1}{2}\left(\frac{0.30}{0.35}+\frac{0.70}{0.75}\right)
+=\frac{1}{2}(0.8571+0.9333)=0.8952
+\]
+
+\[
+\beta_2=\frac{1}{2}\left[(0.30-0.35)+(0.70-0.75)\right]
+=\frac{1}{2}(-0.05-0.05)=-0.05
+\]
+
+For \(E_3\):
+
+\[
+\alpha_3=\frac{1}{2}\left(\frac{0.30}{0.30}+\frac{0.70}{0.70}\right)=1.0000
+\]
+
+\[
+\beta_3=\frac{1}{2}\left[(0.30-0.30)+(0.70-0.70)\right]=0
+\]
+
+The resulting calibration parameters are:
+
+| Expert | \(\alpha_k\) | \(\beta_k\) | Calibration function \(f_k(x)=\alpha_k x+\beta_k\) |
+|---|---:|---:|---|
+| \(E_1\) | 1.1385 | 0.05 | \(f_1(x)=1.1385x+0.05\) |
+| \(E_2\) | 0.8952 | \(-0.05\) | \(f_2(x)=0.8952x-0.05\) |
+| \(E_3\) | 1.0000 | 0 | \(f_3(x)=x\) |
